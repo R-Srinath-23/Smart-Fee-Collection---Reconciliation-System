@@ -6,7 +6,7 @@ A comprehensive full-stack web application designed for educational institutions
 
 ## 🚀 Tech Stack
 
-- **Backend:** FastAPI (Python 3.10+), SQLAlchemy ORM, SQLite, Pydantic v2
+- **Backend:** FastAPI (Python 3.10+), SQLAlchemy ORM, MySQL (PyMySQL), Pydantic v2, Python-dotenv
 - **Frontend:** Next.js 15 (App Router), TypeScript, Vanilla CSS (Modern Dark UI)
 - **API Communication:** RESTful API with CORS middleware
 
@@ -18,9 +18,10 @@ A comprehensive full-stack web application designed for educational institutions
 Edumerge_Solutions/
 ├── backend/
 │   ├── main.py               # FastAPI entry point, CORS & table initialization
-│   ├── database.py           # SQLite connection & session maker
+│   ├── database.py           # Database connection & session management
 │   ├── models.py             # SQLAlchemy database models
 │   ├── schemas.py            # Pydantic validation schemas
+│   ├── .env.example          # Environment variables template
 │   └── routers/
 │       ├── students.py       # Student enrollment & profile endpoints
 │       ├── fee_heads.py      # Fee category & head management
@@ -44,6 +45,7 @@ Edumerge_Solutions/
 │   └── package.json
 ├── requirements.txt          # Python dependencies
 ├── .gitignore                # Git ignore rules
+├── AI_USAGE_REPORT.md        # AI transparency & usage report
 └── README.md                 # Project documentation
 ```
 
@@ -53,34 +55,44 @@ Edumerge_Solutions/
 
 ### 1. Prerequisites
 - Python 3.10+
+- MySQL Server (running locally on port 3306)
 - Node.js 18+ & npm
 
 ---
 
 ### 2. Backend Setup
 
-Open a terminal in the project root:
+1. Open a terminal and navigate to the project directory:
+   ```powershell
+   cd "c:\ML Project\Edumerge_Solutions"
+   ```
 
-```powershell
-cd "c:\ML Project\Edumerge_Solutions"
-```
+2. Activate your virtual environment:
+   ```powershell
+   .\esvenv\Scripts\activate
+   ```
 
-*(Optional) Create and activate a virtual environment:*
-```powershell
-python -m venv venv
-.\venv\Scripts\activate
-```
+3. Install backend dependencies:
+   ```powershell
+   pip install -r requirements.txt
+   ```
 
-Install backend dependencies:
-```powershell
-pip install -r requirements.txt
-```
+4. Configure Database Credentials:
+   - Navigate to `backend/` and copy `.env.example` to `.env`:
+     ```powershell
+     cd backend
+     copy .env.example .env
+     ```
+   - Update `.env` with your actual MySQL credentials:
+     ```env
+     DATABASE_URL=mysql+pymysql://<DB_USER>:<DB_PASSWORD>@localhost:3306/edumerge_fees
+     ```
+   - *(Ensure the `edumerge_fees` database exists in your MySQL instance: `CREATE DATABASE IF NOT EXISTS edumerge_fees;`)*
 
-Start the FastAPI backend server:
-```powershell
-cd backend
-uvicorn main:app --reload --port 8000
-```
+5. Start the FastAPI backend server:
+   ```powershell
+   uvicorn main:app --reload --port 8000
+   ```
 
 - **Backend URL:** `http://localhost:8000`
 - **Interactive Swagger API Docs:** `http://localhost:8000/docs`
@@ -89,21 +101,20 @@ uvicorn main:app --reload --port 8000
 
 ### 3. Frontend Setup
 
-Open a **second terminal** and navigate to the frontend folder:
+1. Open a **second terminal** and navigate to the frontend directory:
+   ```powershell
+   cd "c:\ML Project\Edumerge_Solutions\frontend"
+   ```
 
-```powershell
-cd "c:\ML Project\Edumerge_Solutions\frontend"
-```
+2. Install dependencies:
+   ```powershell
+   npm install
+   ```
 
-Install dependencies:
-```powershell
-npm install
-```
-
-Start the Next.js development server:
-```powershell
-npm run dev
-```
+3. Start the Next.js development server:
+   ```powershell
+   npm run dev
+   ```
 
 - **Frontend Application:** `http://localhost:3000`
 
